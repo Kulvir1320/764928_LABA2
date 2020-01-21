@@ -14,6 +14,7 @@
 		42461BB723D5EDEB00CF894A /* _64928_LABA2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42461BB523D5EDEB00CF894A /* _64928_LABA2.xcdatamodeld */; };
 		42461BB923D5EDED00CF894A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42461BB823D5EDED00CF894A /* Assets.xcassets */; };
 		42461BBC23D5EDED00CF894A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42461BBA23D5EDED00CF894A /* LaunchScreen.storyboard */; };
+		42461BC423D5F94800CF894A /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42461BC323D5F94800CF894A /* TaskTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		42461BB823D5EDED00CF894A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42461BBB23D5EDED00CF894A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42461BBD23D5EDED00CF894A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42461BC323D5F94800CF894A /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				42461BBA23D5EDED00CF894A /* LaunchScreen.storyboard */,
 				42461BBD23D5EDED00CF894A /* Info.plist */,
 				42461BB523D5EDEB00CF894A /* _64928_LABA2.xcdatamodeld */,
+				42461BC323D5F94800CF894A /* TaskTableViewController.swift */,
 			);
 			path = 764928_LABA2;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42461BC423D5F94800CF894A /* TaskTableViewController.swift in Sources */,
 				42461BB123D5EDEB00CF894A /* ViewController.swift in Sources */,
 				42461BAD23D5EDEB00CF894A /* AppDelegate.swift in Sources */,
 				42461BB723D5EDEB00CF894A /* _64928_LABA2.xcdatamodeld in Sources */,
