@@ -22,15 +22,14 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        print("view did load")
+
         
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appdelegate.persistentContainer.viewContext
         contextOfEntity = context
-//        print("before load data")
-//     clearCoreData()
+    
        loadData()
-//        print("after load data")
+
   
         
     }
@@ -59,12 +58,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
         if neededdays == addedDays {
             cell?.backgroundColor = .brown
             cell?.detailTextLabel?.text = "Task completed"
-//            let alert = UIAlertController(title: "Congratulations ", message: " you completed your task ", preferredStyle: .alert)
-//
-//            
-//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-//
-//            self.present(alert, animated: true)
+       
         }
         // Configure the cell...
 
@@ -87,26 +81,24 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
                     self.contextOfEntity?.delete(ob)
                     self.task?.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
-//                    print("item deleted")
+
                 }
             }catch{
-                print("item not deleted")
+                print(error)
             }
             
             do {
                 try self.contextOfEntity?.save()
                 self.loadData()
             }catch{
-                print("not saved")
+                print(error)
             }
           
-//            print(self.task)
+
         }
          let addDays = UIContextualAction(style: .destructive, title: "Add Days ") { (action, view, success) in
                    
-                  
-                   
-                   do{
+                  do{
                        let data = try self.contextOfEntity?.fetch(request)
                        for ob in data as! [NSManagedObject]{
                         var addedDays = ob.value(forKey: "addedDays") as! Int
@@ -122,7 +114,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
                        try self.contextOfEntity?.save()
                        self.loadData()
                    }catch{
-                       print("not saved")
+                       print(error)
                    }
                  
        //            print(self.task)
@@ -213,17 +205,17 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
     
     func loadData(){
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
-        print("request made")
+       
         
         do{
             let result = try contextOfEntity?.fetch(request)
             task = result as! [NSManagedObject]
-            print("data loaded")
+           
         }catch{
             print(error)
         }
         tableView.reloadData()
-        print("table reloaded")
+        
     }
     func clearCoreData() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
@@ -242,7 +234,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
                               try self.contextOfEntity?.save()
                               self.loadData()
                           }catch{
-                              print("not saved")
+                              print(error)
                           }
     }
     
@@ -270,7 +262,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
                        do{
                            let result = try contextOfEntity?.fetch(request)
                            task = result as! [NSManagedObject]
-                           print("data loaded")
+                           
                        }catch{
                            print(error)
                        }

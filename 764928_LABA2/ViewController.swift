@@ -58,22 +58,19 @@ class ViewController: UIViewController {
         
         if title == "" || NeededDays == 0 {
               let alert = UIAlertController(title: "Alert", message: "  Fill your fields ", preferredStyle: .alert)
-            //
-            
-                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            
-                        self.present(alert, animated: true)
+             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+             self.present(alert, animated: true)
         }
         else{
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
         if chooseTask == nil {
-        let entity = NSEntityDescription.insertNewObject(forEntityName: "Entity", into: context)
-        entity.setValue(title, forKey: "title")
-        entity.setValue(NeededDays, forKey: "neededDays")
-        entity.setValue(0, forKey: "addedDays")
-        entity.setValue(description, forKey: "descriptionOfTask")
-        entity.setValue(NSDate(), forKey: "date")
+            let entity = NSEntityDescription.insertNewObject(forEntityName: "Entity", into: context)
+            entity.setValue(title, forKey: "title")
+            entity.setValue(NeededDays, forKey: "neededDays")
+            entity.setValue(0, forKey: "addedDays")
+            entity.setValue(description, forKey: "descriptionOfTask")
+            entity.setValue(NSDate(), forKey: "date")
         do{
             try context.save()
            
@@ -94,9 +91,9 @@ class ViewController: UIViewController {
                 print(error)
             }
         }
-        titleField.text = ""
-        daysField.text = ""
-        descFeild.text = ""
+            titleField.text = ""
+            daysField.text = ""
+            descFeild.text = ""
             dateLabel.text = ""
             dayLabel.text = ""
     }
