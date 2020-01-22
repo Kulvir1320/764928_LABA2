@@ -28,8 +28,10 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
         let context = appdelegate.persistentContainer.viewContext
         contextOfEntity = context
 //        print("before load data")
+//     clearCoreData()
        loadData()
 //        print("after load data")
+  
         
     }
 
@@ -56,6 +58,13 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
         let neededdays = task![indexPath.row].value(forKey: "neededDays") as! Int
         if neededdays == addedDays {
             cell?.backgroundColor = .brown
+            cell?.detailTextLabel?.text = "Task completed"
+//            let alert = UIAlertController(title: "Congratulations ", message: " you completed your task ", preferredStyle: .alert)
+//
+//            
+//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//
+//            self.present(alert, animated: true)
         }
         // Configure the cell...
 
@@ -121,9 +130,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
         addDays.backgroundColor = .purple
         return UISwipeActionsConfiguration(actions: [deleteAction , addDays])
     }
-//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        <#code#>
-//    }
+
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
@@ -138,7 +145,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
         do{
             let result = try contextOfEntity?.fetch(request)
             task = result as! [NSManagedObject]
-            print("data loaded")
+            
         }catch{
             print(error)
         }
@@ -231,17 +238,23 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
         }catch{
             print(error)
         }
+         do {
+                              try self.contextOfEntity?.save()
+                              self.loadData()
+                          }catch{
+                              print("not saved")
+                          }
     }
     
     @IBAction func sortBy_date(_ sender: UIBarButtonItem) {
          let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-                print("request made")
+                
                 
                 do{
                     let result = try contextOfEntity?.fetch(request)
                     task = result as! [NSManagedObject]
-                    print("data loaded")
+                  
                 }catch{
                     print(error)
                 }
@@ -252,7 +265,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate {
     @IBAction func sortBy_title(_ sender: UIBarButtonItem) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
                request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-                       print("request made")
+                     
                        
                        do{
                            let result = try contextOfEntity?.fetch(request)

@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var daysField: UITextField!
     @IBOutlet weak var descFeild: UITextView!
     
+    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     var chooseTask: NSManagedObject?
     var titleVC = ""
     override func viewDidLoad() {
@@ -33,6 +35,13 @@ class ViewController: UIViewController {
                 titleField.text = ob.value(forKey: "title") as? String
                 daysField.text = "\(ob.value(forKey: "neededDays") as? Int ?? 0)"
                 descFeild.text = ob.value(forKey: "descriptionOfTask") as? String
+                let date = (ob.value(forKey: "date") as! Date)
+                let dateformatter = DateFormatter()
+                dateformatter.dateFormat = "EEE, MMM,dd"
+                let hourFormatter = DateFormatter()
+                hourFormatter.dateFormat = "h:mm a"
+                dateLabel.text = dateformatter.string(from: date)
+                dayLabel.text = dateformatter.string(from: date)
             }
             
         }catch{
@@ -47,6 +56,15 @@ class ViewController: UIViewController {
         let NeededDays = Int(daysField.text ?? "0" ) ?? 0
         let description = descFeild.text
         
+        if title == "" || NeededDays == 0 {
+              let alert = UIAlertController(title: "Alert", message: "  Fill your fields ", preferredStyle: .alert)
+            //
+            
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            
+                        self.present(alert, animated: true)
+        }
+        else{
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         if chooseTask == nil {
@@ -58,11 +76,11 @@ class ViewController: UIViewController {
         entity.setValue(NSDate(), forKey: "date")
         do{
             try context.save()
-            print("data d=save")
+           
         }
         catch {
             print(error)
-            print("something wrong")
+            print(error)
         }
         }
         if chooseTask != nil {
@@ -71,7 +89,7 @@ class ViewController: UIViewController {
             chooseTask?.setValue(description, forKey: "descriptionOfTask")
             do{
                 try context.save()
-                print("reEnter data save")
+               
             }catch{
                 print(error)
             }
@@ -79,6 +97,9 @@ class ViewController: UIViewController {
         titleField.text = ""
         daysField.text = ""
         descFeild.text = ""
+            dateLabel.text = ""
+            dayLabel.text = ""
+    }
     }
 }
 
